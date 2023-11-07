@@ -14,18 +14,30 @@ class Auth:
         """_summary_
 
         Args:
-            path (str): _description_
-            excluded_paths (List[str]): _description_
+                path (str): _description_
+                excluded_paths (List[str]): _description_
 
         Returns:
-            bool: _description_
+                bool: _description_
         """
-        if path is None or excluded_paths is None or excluded_paths == []:
+        if path is None:
             return True
-        if path[-1] != '/':
-            path += '/'
+
+        if excluded_paths is None or excluded_paths == []:
+            return True
+
         if path in excluded_paths:
             return False
+
+        for excluded_path in excluded_paths:
+            if excluded_path.startswith(path):
+                return False
+            elif path.startswith(excluded_path):
+                return False
+            elif excluded_path[-1] == "*":
+                if path.startswith(excluded_path[:-1]):
+                    return False
+
         return True
 
     def authorization_header(self, request=None) -> str:
