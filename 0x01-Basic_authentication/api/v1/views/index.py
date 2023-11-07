@@ -24,3 +24,48 @@ def stats() -> str:
     stats = {}
     stats['users'] = User.count()
     return jsonify(stats)
+
+
+@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
+def unauthorized() -> str:
+    """ GET /api/v1/unauthorized
+    Return:
+      - abort(401)
+    """
+    abort(401)
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden() -> str:
+    """ GET /api/v1/forbidden
+    Return:
+      - abort(403)
+    """
+    abort(403)
+
+
+@app_views.route('/bad_request', methods=['GET'], strict_slashes=False)
+def bad_request() -> str:
+    """ GET /api/v1/bad_request
+    Return:
+      - abort(400)
+    """
+    abort(400)
+
+
+@app_views.route('/internal_server_error', methods=['GET'], strict_slashes=False)
+def internal_server_error() -> str:
+    """ GET /api/v1/internal_server_error
+    Return:
+      - abort(500)
+    """
+    abort(500)
+
+
+@app_views.route('/method_not_allowed', methods=['GET'], strict_slashes=False)
+def method_not_allowed() -> str:
+    """ GET /api/v1/method_not_allowed
+    Return:
+      - abort(405)
+    """
+    abort(405)
