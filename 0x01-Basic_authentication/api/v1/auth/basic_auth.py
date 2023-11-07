@@ -17,7 +17,7 @@ class BasicAuth(Auth):
         """
         _summary__
 
-        Args: 
+        Args:
                 authorization_header (str): _description_
 
         Returns:
