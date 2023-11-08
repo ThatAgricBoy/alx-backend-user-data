@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Authentication Module
 """
-
+from os import getenv
 from flask import request
 from typing import List, TypeVar
 
@@ -65,14 +65,16 @@ class Auth:
         return None
 
     def session_cookie(self, request=None):
-        """_summary_
+        """Retrieve the session cookie value from the request.
 
         Args:
-            request ([type], optional): _description_. Defaults to None.
+            request (Request, optional): The Flask request object. Defaults to None.
 
         Returns:
-            _type_: _description_
+            str or None: The value of the session cookie or None if not found.
         """
         if request is None:
             return None
-        return request.cookies.get('session_id')
+
+        session_cookie_name = getenv("SESSION_NAME", "_my_session_id")
+        return request.cookies.get(session_cookie_name)
