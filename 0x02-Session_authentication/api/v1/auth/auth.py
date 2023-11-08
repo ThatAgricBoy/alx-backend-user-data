@@ -68,10 +68,12 @@ class Auth:
         """Retrieve the session cookie value from the request.
 
         Args:
-            request (Request, optional): The Flask request object. Defaults to None.
+            request (Request, optional): The Flask request
+            object. Defaults to None.
 
         Returns:
-            str or None: The value of the session cookie or None if not found.
+            str or None: The value of the session 
+            cookie or None if not found.
         """
         if request is None:
             return None
