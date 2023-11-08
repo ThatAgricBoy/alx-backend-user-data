@@ -132,7 +132,8 @@ def update_user(user_id: str = None) -> str:
     return jsonify(user.to_json()), 200
 
 
-@app_views.route('/users/reset_password', methods=['POST'], strict_slashes=False)
+@app_views.route('/users/reset_password',
+                 methods=['POST'], strict_slashes=False)
 def reset_password() -> str:
     """ POST /api/v1/users/reset_password
     JSON body:
@@ -164,7 +165,8 @@ def reset_password() -> str:
     return jsonify({'error': error_msg}), 400
 
 
-@app_views.route('/users/reset_password', methods=['PUT'], strict_slashes=False)
+@app_views.route('/users/reset_password', methods=['PUT'],
+                 strict_slashes=False)
 def update_password() -> str:
     """ PUT /api/v1/users/reset_password
     JSON body:
