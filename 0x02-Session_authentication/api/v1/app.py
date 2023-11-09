@@ -1,13 +1,8 @@
-#!/usr/bin/env python3
-"""
-Route module for the API
-"""
 from os import getenv
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
 import os
-
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
@@ -16,7 +11,7 @@ auth = None
 
 AUTH_TYPE = os.getenv("AUTH_TYPE")
 
-# check the AUTH_TYPE
+# Check the AUTH_TYPE
 if AUTH_TYPE == 'auth':
     from api.v1.auth.auth import Auth
     auth = Auth()
@@ -26,15 +21,14 @@ elif AUTH_TYPE == 'basic_auth':
 elif AUTH_TYPE == 'session_auth':
     from api.v1.auth.session_auth import SessionAuth
     auth = SessionAuth()
+elif AUTH_TYPE == 'session_exp_auth':
+    from api.v1.auth.session_exp_auth import SessionExpAuth
+    auth = SessionExpAuth()
 
 
 @app.before_request
 def before_request():
-    """Handle actions before each request.
-
-    Returns:
-        None
-    """
+    """Handle actions before each request."""
     if auth is None:
         pass
     else:
