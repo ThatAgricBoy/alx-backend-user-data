@@ -30,20 +30,25 @@ elif AUTH_TYPE == 'session_auth':
 
 @app.before_request
 def before_request():
-    """_summary_
+    """Handle actions before each request.
 
     Returns:
-        _type_: _description_
+        None
     """
     if auth is None:
         pass
     else:
-        excluded_list = ['/api/v1/status/',
-                         '/api/v1/unauthorized/', '/api/v1/forbidden/']
+        excluded_list = [
+            '/api/v1/status/',
+            '/api/v1/unauthorized/',
+            '/api/v1/forbidden/',
+            '/api/v1/auth_session/login/'  # Add the new URL path to the excluded list
+        ]
 
         if auth.require_auth(request.path, excluded_list):
-            if auth.authorization_header(request) is None:
+            if auth.authorization_header(request) is None and auth.session_cookie(request) is None:
                 abort(401, description="Unauthorized")
+
             request.current_user = auth.current_user(request)
             if request.current_user is None:
                 abort(403, description='Forbidden')
