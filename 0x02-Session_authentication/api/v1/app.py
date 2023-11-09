@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+""" Module for session expiration
+"""
+
 from os import getenv
 from api.v1.views import app_views
 from flask import Flask, jsonify, abort, request
