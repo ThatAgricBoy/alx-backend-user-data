@@ -9,25 +9,37 @@ from flask import jsonify, request, abort
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def session_auth():
-    """_summary_
-    """
+    # Retrieve email and password from the request form
     email = request.form.get('email')
     password = request.form.get('password')
-    if email is None or email == '':
+
+    if not email:
         return jsonify({"error": "email missing"}), 400
-    if password is None or password == '':
+
+    if not password:
         return jsonify({"error": "password missing"}), 400
+
+    # Search for users with the given email
     users = User.search({"email": email})
-    if not users or users == []:
+
+    if not users:
         return jsonify({"error": "no user found for this email"}), 404
+
     for user in users:
         if user.is_valid_password(password):
-            from api.v1.app import auth
+            # Create a session ID for the user
             session_id = auth.create_session(user.id)
-            resp = jsonify(user.to_json())
+
+            # Create a response containing user data
+            response_data = user.to_json()
+            resp = jsonify(response_data)
+
+            # Set the session cookie using the SESSION_NAME environment variable
             session_name = os.getenv('SESSION_NAME')
             resp.set_cookie(session_name, session_id)
+
             return resp
+
     return jsonify({"error": "wrong password"}), 401
 
 
