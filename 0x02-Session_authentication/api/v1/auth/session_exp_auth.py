@@ -8,6 +8,8 @@ from os import getenv
 
 
 class SessionExpAuth(SessionAuth):
+    """SessionExpAuth class
+    """
     def __init__(self):
         """Initialize SessionExpAuth."""
         super().__init__()
