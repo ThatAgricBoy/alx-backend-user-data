@@ -8,7 +8,7 @@ from flask import jsonify, request, abort
 
 
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
-def session_auth():
+def auth_session():
     """_summary_
     """
     email = request.form.get('email')

@@ -4,7 +4,6 @@
 
 from models.base import Base
 from sqlalchemy import Column, String, ForeignKey
-from sqlalchemy.orm import relationship
 
 
 class UserSession(Base):
