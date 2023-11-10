@@ -2,10 +2,9 @@
 """ Module of Users views
 """
 
-from api.v1.views import app_views
-from os import getenv
 from api.v1.auth.session_auth import SessionAuth
 from datetime import datetime, timedelta
+from os import getenv
 
 
 class SessionExpAuth(SessionAuth):
