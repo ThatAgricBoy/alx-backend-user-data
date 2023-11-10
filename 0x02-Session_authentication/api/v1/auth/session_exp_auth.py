@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 """ Module of Users views
 """
-import os import getenv
+
 from api.v1.views import app_views
-from models.user import User
-from flask import jsonify, request, abort
-from api.v1.app import auth
+from os import getenv
 from api.v1.auth.session_auth import SessionAuth
 from datetime import datetime, timedelta
-
 
 
 class SessionExpAuth(SessionAuth):
