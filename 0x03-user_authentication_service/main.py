@@ -25,11 +25,11 @@ def log_in(email: str, password: str) -> str:
     url = f"{BASE_URL}/sessions"
     data = {"email": email, "password": password}
     response = requests.post(url, data=data)
-    
+
     assert response.status_code == 200, f"Login failed: {response.text}"
 
     json_response = response.json()
-    
+
     # Adjust the logic based on your actual server response structure
     session_id = json_response.get("session_id")
 
@@ -37,12 +37,10 @@ def log_in(email: str, password: str) -> str:
         # If session_id is not directly in the response, make an additional request to get it
         # Example: session_id = get_session_id_somehow()
 
-        raise AssertionError(f"Session ID is missing in the response: {json_response}")
+        raise AssertionError(
+            f"Session ID is missing in the response: {json_response}")
 
     return session_id
-
-
-
 
 
 def profile_unlogged() -> None:
