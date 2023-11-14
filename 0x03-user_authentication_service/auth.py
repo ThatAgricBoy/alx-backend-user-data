@@ -65,4 +65,5 @@ class Auth:
         Returns:
             str: _description_
         """
-        return str(uuid.uuid4())
+        id = uuid.uuid4()
+        return str(id)
