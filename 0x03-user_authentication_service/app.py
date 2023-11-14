@@ -8,7 +8,7 @@ app = Flask(__name__)
 AUTH = Auth()
 
 
-@app.route('/', methods=['GET'], strict_slashes=False)
+@app.route('/', methods=['GET'])
 def index() -> str:
     """_summary_
 
@@ -66,7 +66,7 @@ def logout() -> str:
     if not user:
         abort(403)
     AUTH.destroy_session(user.id)
-    return redirect('/')
+    return redirect('/index')
 
 
 @app.route('/profile', methods=['GET'])
