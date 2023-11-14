@@ -54,4 +54,3 @@ class DB:
         if not user:
             raise NoResultFound
         return user
-    
