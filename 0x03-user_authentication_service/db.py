@@ -5,11 +5,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
-from user import User
+from sqlalchemy.orm.exc import NoResultFound
 
-from user import Base
+from user import User, Base
 
 
 class DB:
@@ -36,7 +35,6 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> None:
         """Method that saves a new user to the database
         """
-        from user import User
         new_user = User(email=email, hashed_password=hashed_password)
         self._session.add(new_user)
         self._session.commit()
