@@ -1,15 +1,9 @@
 #!/usr/bin/env python3
 """Flask app
 """
-from flask import Flask, jsonify, request, abort, redirect
-from auth import Auth
-from flask.helpers import make_response
-from typing import Dict
-from os import getenv
+from flask import Flask, jsonify
 
 app = Flask(__name__)
-
-AUTH = Auth()
 
 
 def index() -> str:
