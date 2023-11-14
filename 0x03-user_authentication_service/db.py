@@ -54,7 +54,7 @@ class DB:
         if not user:
             raise NoResultFound
         return user
-    
+
     def update_user(self, user_id: int, **kwargs) -> None:
         """_summary_
 
@@ -77,4 +77,3 @@ class DB:
         user = self.find_user_by(id=user_id)
         self._session.delete(user)
         self._session.commit()
-        
