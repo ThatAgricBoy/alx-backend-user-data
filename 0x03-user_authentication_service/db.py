@@ -41,14 +41,18 @@ class DB:
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
-        """Method that returns the first row found in the users table
+        """Method that takes in arbitrary keyword arguments
+        and returns the first row found in the users table
         as filtered by the method’s input arguments
         """
         if not kwargs:
             raise InvalidRequestError
         if not all(key in User.__table__.columns for key in kwargs):
             raise InvalidRequestError
-        user = self._session.query(User).filter_by(**kwargs).first()
+        try:
+            user = self._session.query(User).filter_by(**kwargs).first()
+        except Exception:
+            raise InvalidRequestError
         if not user:
             raise NoResultFound
         return user
