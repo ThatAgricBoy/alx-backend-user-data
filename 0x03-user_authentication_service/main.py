@@ -34,11 +34,10 @@ def log_in(email: str, password: str) -> str:
     session_id = json_response.get("session_id")
 
     if session_id is None:
-        # If session_id is not directly in the response, make an additional request to get it
-        # Example: session_id = get_session_id_somehow()
-
-        raise AssertionError(
-            f"Session ID is missing in the response: {json_response}")
+        session_id = json_response.get("session_id_generated")
+        if session_id is None:
+            raise AssertionError(
+                f"Session ID is missing in the response: {json_response}")
 
     return session_id
 
